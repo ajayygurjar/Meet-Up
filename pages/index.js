@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MeetupList from "../components/meetups/MeetupList";
+import { revalidatePath } from "next/cache";
 
 const DUMMY_MEETUPS = [
 	{
@@ -56,7 +57,8 @@ export async function getStaticProps(){
 	return{
 		props:{
 			meetups:DUMMY_MEETUPS,
-		}
+		},
+		revalidate:10
 	}
 
 }
