@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MeetupList from "../components/meetups/MeetupList";
-import { revalidatePath } from "next/cache";
+import { revalidate } from "next/cache";
 
 const DUMMY_MEETUPS = [
 	{
@@ -45,39 +45,35 @@ const DUMMY_MEETUPS = [
 	},
 ];
 
-
-
 const HomePage = (props) => {
 	
 	return (
 	<MeetupList meetups={props.meetups} />
 	);
 };
-// export async function getStaticProps(){
-// 	//fetch data from an API
-// 	//always return objects
-// 	return{
-// 		props:{
-// 			meetups:DUMMY_MEETUPS,
-// 		},
-// 		revalidate:10
-// 	}
-
-// }
-
-export async function getServerSideProps(context) {
-
-	const req=context.req;
-	const res=context.res;
-	
+export async function getStaticProps(){
 	//fetch data from an API
+	//always return objects
 	return{
 		props:{
-			meetups:DUMMY_MEETUPS
-		}
+			meetups:DUMMY_MEETUPS,
+		},
+		revalidate:10
 	}
-	
-}
 
+}
+// export async function getServerSideProps(context) {
+
+// 	const req=context.req;
+// 	const res=context.res;
+
+// 	//fetch data from an API
+// 	return{
+// 		props:{
+// 			meetups:DUMMY_MEETUPS
+// 		}
+// 	}
+	
+// }
 
 export default HomePage;
